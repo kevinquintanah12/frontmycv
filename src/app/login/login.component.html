@@ -1,6 +1,13 @@
 <table border=1>
 <tr> 
-  <td> login into  </td> <td> CRM-uv </td>
+  <td> login CRM-uv  </td> <td> 
+
+  <a routerLink="/">
+     cancel 
+  </a>
+   
+
+  </td>
 </tr>
 <tr> 
   <td> Email </td> <td> <input type="email">  </td>
@@ -9,13 +16,29 @@
 <td> Password </td> <td> <input type="password">  </td>
 </tr>
 <tr> 
- <td></td> <td> Forgot Password ? </td> 
+ <td></td> <td>
+
+  <a routerLink="/forgot-password">
+     Forgot Password ? 
+  </a>
+
+</td> 
 </tr>
 <tr> 
-<td> </td> <td> <button> log in </button> </td>
+<td> </td> <td>
+
+      <a routerLink="/home">
+         <button> log in </button>
+      </a>
+ </td>
 </tr>
 <tr> 
- <td></td> <td> new? create account </td> 
+ <td></td> <td> new?
+
+  <a routerLink="/newuser">
+    create account
+  </a>
+ </td> 
 </tr>
 </table>
 
