@@ -8,6 +8,7 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { NewUserComponent } from './new-user/new-user.component';
+import {FormsModule } from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { NewUserComponent } from './new-user/new-user.component';
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule
   ],
   providers: [],
