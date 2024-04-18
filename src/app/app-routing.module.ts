@@ -5,6 +5,7 @@ import { LoginComponent } from "./login/login.component";
 import { LandingPageComponent } from "./landing-page/landing-page.component";
 import { ForgotPasswordComponent } from "./forgot-password/forgot-password.component";
 import { NewUserComponent } from "./new-user/new-user.component";
+import { ResetPasswordComponent } from "./reset-password/reset-password.component";
 
 const routes: Routes = [
   { path: '', component: LandingPageComponent},
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent }, 
   { path: 'forgot-password', component: ForgotPasswordComponent }, 
   { path: 'newuser', component: NewUserComponent }, 
+  { path: 'reset-password', component: ResetPasswordComponent }, 
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

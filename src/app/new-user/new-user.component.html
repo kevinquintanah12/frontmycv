@@ -11,7 +11,7 @@
 </tr>
 
 <tr>
- <td colspan=2> <input type="email">  </td>
+ <td colspan=2> <input type="email" [(ngModel)]="myPayloadUser.email" >  </td>
 </tr>
 
 <tr>
@@ -19,14 +19,15 @@
 </tr>
 
 <tr>
-<td> <input type="text">  </td> <td> <input type="text">  </td>
+<td>  <input type="text" [(ngModel)]="myPayloadUser.firstName" name="firstName" >  </td>
+ <td> <input type="text" [(ngModel)]="myPayloadUser.lastName">  </td>
 </tr>
 
 <tr>
 <td colspan=2> Password </td>   
 </tr>
 <tr colspan=2>
-<td>  <input type="password">  </td>
+<td>  <input type="password" [(ngModel)]="myPayloadUser.password">  </td>
 </tr>
 
 
@@ -44,10 +45,8 @@
 </tr>
 <tr>
  <td></td> <td> 
-  <button> 
-     <a routerLink="/login">
+  <button (click)="createUser()"> 
        create
-     </a>
   </button>
 
  </td>
