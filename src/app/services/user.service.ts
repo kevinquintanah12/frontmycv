@@ -66,4 +66,41 @@ export class UserService {
    return myNewUser;
  } 
 
+
+  resetPassword(email: String): User {
+
+    console.log("email ... " + email);
+
+    var myUser = this.validateUser(email);
+
+    return myUser;
+
+  }
+
+  validateUser(email: String ) : User {
+
+    // call fake query api by email
+
+    var myUser = new User();
+
+    // Success, email valid
+    if ( email == "adsoft@live.com.mx" )
+    {
+       console.log("Success " + myUser.id);
+       myUser.id = 1; // Success
+       myUser.email = email;
+       myUser.firstName = "Adolfo";
+       myUser.lastName = "Centeno";
+       myUser.password = "";
+    }
+    else {
+       console.log("Error" + myUser.id);
+
+       myUser.id = 0; // Error
+    } 
+    
+    return myUser;
+  
+  }
+
 }
