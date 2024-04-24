@@ -73,9 +73,60 @@ export class UserService {
 
     var myUser = this.validateUser(email);
 
+    if (myUser.id != 0) {
+
+      var myUrlReset = this.createUrlReset(myUser.email);
+      console.log(myUrlReset);
+      var sendEmail = this.sendEmail(myUser.email, myUrlReset);
+      console.log(sendEmail);
+    }
+
     return myUser;
 
   }
+
+  sendEmail(email: String, urlReset: String) : String {
+    
+   var emailSuccess = 0;
+
+   // send email using SMTP (gmail, outlook..)
+
+   // email sent
+   emailSuccess = 1;
+   console.log('sent to :' + email);
+   console.log('url : ' + urlReset);
+   
+   return "" + emailSuccess; 
+  
+  }
+  createUrlReset(email: String) : String {
+    var myUrlReset = "" +
+        this.createBaseURL() +
+        "?" +   
+        "email=" + email +  
+        "&" + 
+        "token=" + this.createTokenReset(email)
+
+     return myUrlReset;
+  }
+
+  createBaseURL() : String {
+
+   // call process to create base URL
+    var baseURL = "http://localhost:4200/reset-password";
+
+    return baseURL;
+  }
+
+  createTokenReset(email: String) : String {
+    // JWT create a token to encrypt email
+    var SECRET_KEY = "i-love-adsoftsito";
+
+    var myToken = "lkjlskiei8093wjdjde9203394"
+
+    return myToken;
+  }
+
 
   validateUser(email: String ) : User {
 
