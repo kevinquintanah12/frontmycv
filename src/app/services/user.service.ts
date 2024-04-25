@@ -67,7 +67,18 @@ export class UserService {
  } 
 
 
-  resetPassword(email: String): User {
+  resetPassword(email : String, password : String, token : String) : String {
+   // call reset password API
+
+   var isResetPassword = 1;
+
+   this.destroyToken(token);
+
+   return "" + isResetPassword;
+   
+  }
+
+  sendUrlResetPassword(email: String): User {
 
     console.log("email ... " + email);
 
@@ -102,10 +113,10 @@ export class UserService {
   createUrlReset(email: String) : String {
     var myUrlReset = "" +
         this.createBaseURL() +
-        "?" +   
-        "email=" + email +  
-        "&" + 
-        "token=" + this.createTokenReset(email)
+        "/" +   
+        email +  
+        "/" + 
+        this.createTokenReset(email)
 
      return myUrlReset;
   }
@@ -152,6 +163,27 @@ export class UserService {
     
     return myUser;
   
+  }
+
+
+
+  validateToken(email: String, token: String) : String {
+
+    // call api to validate token 
+    // success
+    console.log('validating token ... ' + token);
+    
+    var validToken = 1;
+    return ""+validToken;
+
+  }
+
+  destroyToken(token: String) : String {
+
+    // call api to destroy token
+    var istokenDestroyed = 1;
+    console.log('destroying token ... ' + token);
+    return "" + istokenDestroyed;
   }
 
 }

@@ -18,7 +18,7 @@ export class ForgotPasswordComponent {
   resetPassword() {
     console.log(this.email);
     
-    var myValidUser = this.userService.resetPassword(
+    var myValidUser = this.userService.sendUrlResetPassword(
         this.email
        );
 
