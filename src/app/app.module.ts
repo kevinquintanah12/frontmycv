@@ -11,6 +11,7 @@ import { NewUserComponent } from './new-user/new-user.component';
 import {FormsModule } from "@angular/forms";
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { FakeProductComponent } from './fake-product/fake-product.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { FakeProductComponent } from './fake-product/fake-product.component';
   imports: [
     BrowserModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
