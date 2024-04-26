@@ -10,6 +10,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { NewUserComponent } from './new-user/new-user.component';
 import {FormsModule } from "@angular/forms";
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { FakeProductComponent } from './fake-product/fake-product.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     LoginComponent,
     ForgotPasswordComponent,
     NewUserComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    FakeProductComponent
   ],
   imports: [
     BrowserModule,

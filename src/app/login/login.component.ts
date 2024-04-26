@@ -17,8 +17,8 @@ export class LoginComponent {
     ) 
     { } 
 
-    email : String = "admin@admin.com";
-    password : String = "admin123";
+    email : String = "adsoft@live.com.mx";
+    password : String = "123";
     myLogin = new Token();
 
     callLogin() {
