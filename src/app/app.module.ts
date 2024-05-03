@@ -12,6 +12,7 @@ import {FormsModule } from "@angular/forms";
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { FakeProductComponent } from './fake-product/fake-product.component';
 import { HttpClientModule } from '@angular/common/http';
+import { GraphQLModule } from './graphql.module';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     FormsModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    GraphQLModule
   ],
   providers: [],
   bootstrap: [AppComponent]
