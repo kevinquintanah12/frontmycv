@@ -2,23 +2,42 @@ import { Injectable } from '@angular/core';
 import { Credential } from '../models/user/Credential'
 import { User } from '../models/user/User'
 import { Token } from '../models/user/Token'
+import {Apollo, gql} from 'apollo-angular';
+
+const TOKENAUTH = gql`
+  mutation TokenAuth($username: String!, $password: String!) {
+    tokenAuth(username: $username, password: $password) {
+      token
+    }
+  }
+`;
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  constructor() { }
+  constructor(private apollo: Apollo) { }
 
-  postLogin(myCredential: Credential): Token {
+  tokenAuth(myCredential: Credential) {
 
-    console.log("email ... " + myCredential.email);
+    console.log("username ... " + myCredential.username);
     console.log("password ... " + myCredential.password);
 
     var myToken = new Token();
 
-    // call fake api
-    if ( (myCredential.email == "adsoft@live.com.mx") &&
+    // call api
+
+    return this.apollo.mutate({
+      mutation: TOKENAUTH,
+      variables: {
+        username: myCredential.username,
+        password: myCredential.password
+      }
+    });
+
+/*    if ( (myCredential.email == "adsoft@live.com.mx") &&
 	 (myCredential.password == "123"))
     {
        myToken.id = "0001";
@@ -30,8 +49,8 @@ export class UserService {
        myToken.user = "bad credentials";
        myToken.token = "";
     }  
-
-    return myToken;
+*/
+   //  return myToken;
   }
 
 
