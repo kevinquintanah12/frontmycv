@@ -12,6 +12,17 @@ const TOKENAUTH = gql`
   }
 `;
 
+const CREATEUSER = gql`
+  mutation CreateUser($username: String!, $email: String!, $password: String!) {
+    createUser(username: $username, email: $email, password: $password) {
+      user { 
+        id
+        username
+        email
+      }
+    }
+  }
+  `;
 
 @Injectable({
   providedIn: 'root'
@@ -54,35 +65,20 @@ export class UserService {
   }
 
 
-  createUser(myUser: User): User {
+  createUser(myUser: User) {
 
     console.log("email ... " + myUser.email);
     console.log("password ... " + myUser.password);
 
-    var myNewUser = new User();
+    return this.apollo.mutate({
+        mutation: CREATEUSER,
+        variables: {
+          username: myUser.username,
+          email: myUser.email,
+          password: myUser.password
+        }
+    });
 
-    // call fake api - create user
-    // Success
-    myNewUser.id = 0;
-
-    
-    if ( myNewUser.id != 0 )
-    {
-       console.log("Success " + myNewUser.id);
-       myNewUser.id = 1; // Success
-       myNewUser.email = myUser.email;
-       myNewUser.firstName = myUser.firstName;
-       myNewUser.lastName = myUser.lastName;
-       myNewUser.password = myUser.password;
-
-    }
-    else {
-       console.log("Error" + myNewUser.id);
-
-       myNewUser.id = 0; // Error
-    } 
-
-   return myNewUser;
  } 
 
 
@@ -170,8 +166,7 @@ export class UserService {
        console.log("Success " + myUser.id);
        myUser.id = 1; // Success
        myUser.email = email;
-       myUser.firstName = "Adolfo";
-       myUser.lastName = "Centeno";
+       myUser.username = "adsoft";
        myUser.password = "";
     }
     else {
