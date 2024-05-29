@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FakeProductService } from '../services/fake-product.service';
 import { Subscription } from 'rxjs';
 import { GraphqlLinkService} from '../services/graphql.link.service';
+import { StorageService } from "../services/storage.service";
 
 @Component({
   selector: 'app-fake-product',
@@ -11,13 +12,16 @@ import { GraphqlLinkService} from '../services/graphql.link.service';
 
 export class FakeProductComponent {
 
-  constructor(private fakeProductService: FakeProductService,
+  constructor(
+              private storageService : StorageService,
+              private fakeProductService: FakeProductService,
               private graphqlLinkService: GraphqlLinkService,
     ) 
     { }
     //arrFakeProducts = [];
     arrLinks = [];
     loading: boolean;
+    token : string = "";
 
     private querySubscription: Subscription;    
     
@@ -28,14 +32,10 @@ export class FakeProductComponent {
 
     private getLinks()
     {
-      /*
-     this.fakeProductService.getFake_Products().subscribe((fakeProducts: any) => {
-       this.arrFakeProducts = fakeProducts;
-       console.log(this.arrFakeProducts);
-      });
-    */
-     alert("query");
-     this.querySubscription = this.graphqlLinkService.getLinks()
+     this.token = this.storageService.getSession("token");
+
+     alert("token " + this.token);
+     this.querySubscription = this.graphqlLinkService.getLinks(this.token)
       //.valueChanges
       .subscribe(({ data, loading }) => {
         this.loading = loading;

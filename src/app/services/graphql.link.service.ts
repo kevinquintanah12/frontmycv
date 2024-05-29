@@ -19,7 +19,7 @@ export class GraphqlLinkService {
 
   constructor(private apollo: Apollo) { }
 
-  getLinks() {
+  getLinks(mytoken: string) {
     
       return this.apollo.query({
         query: LINKS_QUERY,
@@ -27,7 +27,7 @@ export class GraphqlLinkService {
         }, 
         context: {
           // example of setting the headers with context per operation
-          // headers: new HttpHeaders().set('Authorization', 'JWT ' + mytoken),
+          headers: new HttpHeaders().set('Authorization', 'JWT ' + mytoken),
         },
       });
     //}
