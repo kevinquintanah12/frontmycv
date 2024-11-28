@@ -1,25 +1,75 @@
-/* You can add global styles to this file, and also import other style files */
+/* Importar la fuente de Google Fonts */
 @import url('https://fonts.googleapis.com/css?family=Raleway:300,700');
 
 body {
-   background : #2E9ce6;
+   font-family: 'Raleway', 'Arial', sans-serif;
+   color: #0c0c0c;
+   margin: 0;
    padding: 3em;
-   font-family: 'Raleway', 'Arial';
-   color: #fff;
+   background: linear-gradient(135deg, #ffffff, #f5f5f5); /* Degradado sutil */
+   background-size: 400% 400%; /* Movimiento para animación */
+   animation: subtleGradient 15s ease infinite; /* Animación suave */
+ }
+ 
+ /* Animación para un degradado dinámico */
+ @keyframes subtleGradient {
+   0% {
+     background-position: 0% 50%;
+   }
+   50% {
+     background-position: 100% 50%;
+   }
+   100% {
+     background-position: 0% 50%;
+   }
+ }
+ 
+
+/* Estilo para el contenedor del header */
+nav .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.151); /* Fondo semitransparente */
+  padding: 1em 2em;
+  border-radius: 10px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-ul {
-   list-style-type: none;
-   margin: 0 0 2em 0;
-   padding: 0;
+/* Estilo del título */
+nav .header h1 {
+  margin: 0 auto; /* Asegura que quede centrado */
+  font-size: 2em;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-align: center;
+  flex-grow: 1; /* Expande para ocupar espacio disponible */
 }
 
-ul li {
-   display: inline;
-   margin-right: 30px;
+/* Contenedor para botones de navegación */
+nav .header .nav-buttons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-a {
-   color: #0f0;
-   text-decoration: none;
+/* Botón estilizado */
+.btn-login {
+  background-color: #0f6c6c; /* Color de fondo del botón */
+  color: #fff;
+  font-size: 1em;
+  padding: 0.5em 1.5em;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  font-family: 'Raleway', sans-serif;
+}
+
+.btn-login:hover {
+  background-color: #0a4848; /* Color al pasar el mouse */
+  transform: scale(1.05); /* Efecto de agrandamiento */
 }

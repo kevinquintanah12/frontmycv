@@ -3,6 +3,7 @@ import { Credential } from '../models/user/Credential'
 import { User } from '../models/user/User'
 import { Token } from '../models/user/Token'
 import {Apollo, gql} from 'apollo-angular';
+import { HttpHeaders } from '@angular/common/http';
 
 const TOKENAUTH = gql`
   mutation TokenAuth($username: String!, $password: String!) {
@@ -23,6 +24,17 @@ const CREATEUSER = gql`
     }
   }
   `;
+
+
+const GET_CURRENT_USER = gql`
+  query GetCurrentUser {
+    currentUser {
+      id
+      username
+      email
+    }
+  }
+`;
 
 @Injectable({
   providedIn: 'root'
@@ -64,6 +76,12 @@ export class UserService {
    //  return myToken;
   }
 
+  private createAuthHeader(token: string) {
+    return {
+      headers: new HttpHeaders().set('Authorization', `JWT ${token}`),
+    };
+  }
+
 
   createUser(myUser: User) {
 
@@ -80,6 +98,16 @@ export class UserService {
     });
 
  } 
+
+
+ getCurrentUser(token: string) {
+  return this.apollo.query({
+    query: GET_CURRENT_USER,
+    context: this.createAuthHeader(token),
+  });
+}
+
+
 
 
   resetPassword(email : String, password : String, token : String) : String {

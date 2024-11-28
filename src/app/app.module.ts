@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
-import { HomeComponent } from './home/home.component';
+import { HeaderComponent } from './header/header.component';
 import { LoginComponent } from './login/login.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { NewUserComponent } from './new-user/new-user.component';
@@ -13,17 +13,29 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { FakeProductComponent } from './fake-product/fake-product.component';
 import { HttpClientModule } from '@angular/common/http';
 import { GraphQLModule } from './graphql.module';
+import { WorkexperienceComponent } from './workexperience/workexperience.component';
+import { EducationComponent } from './education/education.component';
+import { SkillsComponent } from './skills/skills.component';
+import { InterestComponent } from './interest/interest.component';
+import { LanguageComponent } from './language/language.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LandingPageComponent,
-    HomeComponent,
+    HeaderComponent,
     LoginComponent,
     ForgotPasswordComponent,
     NewUserComponent,
     ResetPasswordComponent,
-    FakeProductComponent
+    FakeProductComponent,
+    WorkexperienceComponent,
+    EducationComponent,
+    SkillsComponent,
+    InterestComponent,
+    LanguageComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
