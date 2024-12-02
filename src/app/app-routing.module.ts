@@ -17,6 +17,8 @@ const routes: Routes = [
   { path: '', component: LandingPageComponent},
   { path: 'home', component: DashboardComponent }, 
   { path: 'header', component: HeaderComponent }, 
+  { path: 'header/:id', component: HeaderComponent }, 
+
   { path: 'education/:id', component: EducationComponent },
   { path: 'language/:id', component: LanguageComponent }, 
   { path: 'skills/:id', component: SkillsComponent }, 

@@ -23,9 +23,7 @@
                 <span class="action-link create" (click)="onCreateNew()">
                     <i class="fas fa-plus-circle"></i> Crear
                 </span>
-                <span class="action-link edit" (click)="onEdit()">
-                    <i class="fas fa-edit"></i> Editar
-                </span>
+                
                 
             </div>
     
@@ -67,6 +65,9 @@
                         <span class="action-link delete" (click)="onDelete(header.id)">
                           <i class="fas fa-trash-alt"></i> 
                         </span>
+                        <span class="action-link edit" (click)="onEdit(header.id)">
+                          <i class="fas fa-edit"></i> Editar
+                        </span>
                         
                     </tr>
                 </tbody>
@@ -90,7 +91,7 @@
               <li *ngFor="let accomplishment of experience.accomplishments">{{ accomplishment }}</li>
             </ul>
             <div class="actions">
-              <button class="edit" (click)="onEditExperience(experience.idWorkExperience)"></button>
+              <button class="edit" (click)="onEditExperience(experience.id)"></button>
               <button class="delete" (click)="onDeleteExperience(experience.id)"></button>
             </div>
           </div>
@@ -176,6 +177,32 @@
             <button class="create" (click)="onCreateLanguages()">Añadir Idioma</button>
         </div>
       </section>
+
+
+      <section class="interests work-experience">
+        <h3>Intereses</h3>
+        <div *ngIf="interests.length > 0; else noInterests" class="jobs">
+          <div *ngFor="let interest of interests" class="job">
+            <h4>{{ interest.name }}</h4>
+            <p>{{ interest.description }}</p>
+            <span class="action-link delete" (click)="deleteInterest(interest.id)">
+              <i class="fas fa-trash-alt"></i> 
+            </span>
+            <span class="action-link edit" (click)="onEditInterest(interest.id)">
+              <i class="fas fa-edit"></i> Editar
+            </span>
+          </div>
+        </div>
+      
+        <ng-template #noInterests>
+          <p>No tienes intereses. ¿Quieres añadir uno nuevo?</p>
+        </ng-template>
+      
+        <div class="create-new">
+          <button class="create" (click)="onCreateInterest()">Crear Nuevo</button>
+        </div>
+      </section>
+      
     
       
     

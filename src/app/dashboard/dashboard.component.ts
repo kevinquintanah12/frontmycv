@@ -7,6 +7,7 @@ import { GraphqlWorkExperienceService } from '../services/workexperience.service
 import { GraphqlEducationService } from '../services/education.service';
 import { GraphqlSkillService } from '../services/skills.service';
 import { GraphqlLanguageService } from '../services/languages.servive';
+import { GraphqlInterestService } from '../services/interest.services';
 
 
 @Component({
@@ -23,12 +24,15 @@ export class DashboardComponent implements OnInit {
   degrees: any[] = [];
   skills: any[] = [];
   languages: any[] = [];
+  interests: any[] = [];
+
+  
 
 
   constructor(
     private skillService: GraphqlSkillService,
     private languageService: GraphqlLanguageService,
-
+    private interestService: GraphqlInterestService,
     private userService: UserService,
     private storageService: StorageService,
     private graphqlHeaderService: GraphqlHeaderService,
@@ -61,6 +65,17 @@ export class DashboardComponent implements OnInit {
       (error) => {
         console.error('Error al obtener los datos del usuario:', error);
         alert('Hubo un error al cargar el perfil del usuario.');
+      }
+    );
+
+
+    this.interestService.getInterests(this.token).subscribe(
+      (response: any) => {
+        this.interests = response.data.interests;
+        console.log('Intereses cargados:', this.interests);
+      },
+      (error) => {
+        console.error('Error al cargar intereses:', error);
       }
     );
 
@@ -165,19 +180,24 @@ export class DashboardComponent implements OnInit {
   }
 
   // Función para redirigir a la página de edición
-  onEdit(): void {
+  onEdit(id: number): void {
     const selectedHeader = this.headers[0]; // Asumiendo que siempre editarás el primer header (puedes cambiar esto)
     if (!selectedHeader) {
       alert('No hay headers disponibles para editar.');
       return;
     }
-    this.router.navigate(['/header']); // Redirige a la ruta de edición con el ID del header
+    this.router.navigate([`/header/${id}`]); // Redirige a la ruta de edición con el ID del header
   }
 
 
   // Función para redirigir a la página de creación de experiencia laboral
   onCreateExperience(): void {
     this.router.navigate(['/workexperience']);
+  }
+
+
+  onCreate(): void {
+    this.router.navigate(['/interest']);
   }
 
   onCreateDegree(): void {
@@ -187,6 +207,10 @@ export class DashboardComponent implements OnInit {
 
   onCreateSkills(): void {
     this.router.navigate(['/skills']);
+  }
+
+  onCreateInterest(): void {
+    this.router.navigate(['/interest']);
   }
 
   onCreateLanguages(): void {
@@ -203,6 +227,9 @@ export class DashboardComponent implements OnInit {
   }
   onEditSkill(id: number): void {
     this.router.navigate([`/skills/${id}`]);
+  }
+  onEditInterest(id: number): void {
+    this.router.navigate([`/interest/${id}`]);
   }
 
 
@@ -265,6 +292,43 @@ export class DashboardComponent implements OnInit {
           if (error.networkError) {
             console.error('Error de red:', error.networkError);
             alert('Error de red al intentar eliminar la Habilidad . Por favor, revisa tu conexión.');
+          }
+  
+          if (error.graphQLErrors && error.graphQLErrors.length > 0) {
+            error.graphQLErrors.forEach((err: any) => {
+              console.error('Error de GraphQL:', err.message);
+              alert(`Error del servidor: ${err.message}`);
+            });
+          }
+  
+          // Mensaje genérico en caso de que no se pueda identificar la causa exacta
+          alert('Hubo un error desconocido al eliminar la Habilidad.');
+        }
+      );
+    }
+  }
+
+
+
+  deleteInterest(idInterest: number): void {
+    if (confirm('¿Estás seguro de que deseas eliminar esta experiencia laboral?')) {
+      const id = Number(idInterest); // Asegúrate de que sea un número válido
+  
+      this.interestService.deleteInterest(id, this.token).subscribe(
+        (response) => {
+          console.log('Habilidad eliminada con éxito:', response);
+          this.interests = this.interests.filter(exp => exp.id !== id);
+          alert('Interes eliminada correctamente');
+          window.location.reload(); // Recarga la página
+
+        },
+        (error) => {
+          console.error('Error al eliminar la Interes :', error);
+  
+          // Verificar detalles del error
+          if (error.networkError) {
+            console.error('Error de red:', error.networkError);
+            alert('Error de red al intentar eliminar la INteres . Por favor, revisa tu conexión.');
           }
   
           if (error.graphQLErrors && error.graphQLErrors.length > 0) {

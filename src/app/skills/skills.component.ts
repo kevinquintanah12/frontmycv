@@ -83,6 +83,7 @@ export class SkillsComponent implements OnInit {
       description: this.description,
     };
 
+    // Si estamos en modo edición, añadimos el idSkill
     if (this.isEditMode && this.currentSkillId) {
       skillData.idSkill = this.currentSkillId; // Añadir el ID si estamos en modo edición
       this.skillService.updateSkill(skillData, this.token).subscribe(

@@ -38,6 +38,20 @@ const CREATE_INTEREST_MUTATION = gql`
   }
 `;
 
+const UPDATE_INTEREST_MUTATION = gql`
+  mutation UpdateInterest(
+    $idInterest: Int!
+    $name: String!
+    $description: String!
+  ) {
+    updateInterest(idInterest: $idInterest, name: $name, description: $description) {
+      idInterest
+      name
+      description
+    }
+  }
+`;
+
 const DELETE_INTEREST_MUTATION = gql`
   mutation DeleteInterest($idInterest: Int!) {
     deleteInterest(idInterest: $idInterest) {
@@ -85,16 +99,36 @@ export class GraphqlInterestService {
   }
 
   /**
-   * Crear un nuevo interés.
-   * @param interest Datos del nuevo interés.
+   * Crear o actualizar un interés.
+   * @param interest Datos del interés. Debe incluir `idInterest` para actualizar, o no incluirlo para crear uno nuevo.
    * @param token Token de autenticación JWT.
    */
-  createInterest(interest: { name: string; description: string }, token: string) {
-    return this.apollo.mutate({
-      mutation: CREATE_INTEREST_MUTATION,
-      variables: interest,
-      context: this.createAuthHeader(token),
-    });
+  saveInterest(
+    interest: { idInterest?: number; name: string; description: string },
+    token: string
+  ) {
+    if (interest.idInterest) {
+      // Actualizar interés existente
+      return this.apollo.mutate({
+        mutation: UPDATE_INTEREST_MUTATION,
+        variables: {
+          idInterest: interest.idInterest,
+          name: interest.name,
+          description: interest.description,
+        },
+        context: this.createAuthHeader(token),
+      });
+    } else {
+      // Crear nuevo interés
+      return this.apollo.mutate({
+        mutation: CREATE_INTEREST_MUTATION,
+        variables: {
+          name: interest.name,
+          description: interest.description,
+        },
+        context: this.createAuthHeader(token),
+      });
+    }
   }
 
   /**

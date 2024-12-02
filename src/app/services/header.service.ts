@@ -61,6 +61,35 @@ const CREATE_HEADER_MUTATION = gql`
   }
 `;
 
+const UPDATE_HEADER_MUTATION = gql`
+  mutation UpdateHeader(
+    $idHeader: Int!
+    $name: String!
+    $description: String!
+    $imageUrl: String
+    $email: String!
+    $phoneNumber: String
+    $location: String
+    $github: String
+  ) {
+    updateHeader(
+      idHeader: $idHeader
+      name: $name
+      description: $description
+      imageUrl: $imageUrl
+      email: $email
+      phoneNumber: $phoneNumber
+      location: $location
+      github: $github
+    ) {
+      idHeader
+      name
+      description
+      email
+    }
+  }
+`;
+
 const DELETE_HEADER_MUTATION = gql`
   mutation DeleteHeader($id: Int!) {
     deleteHeader(idHeader: $id) {
@@ -116,6 +145,30 @@ export class GraphqlHeaderService {
       mutation: CREATE_HEADER_MUTATION,
       variables: {
         idHeader, // Incluye el ID aquí
+        name: header.name,
+        description: header.description,
+        imageUrl: header.imageUrl || null,
+        email: header.email,
+        phoneNumber: header.phoneNumber || null,
+        location: header.location || null,
+        github: header.github || null,
+      },
+      context: {
+        headers: new HttpHeaders().set('Authorization', 'JWT ' + token),
+      },
+    });
+  }
+
+  /**
+   * Actualizar un header existente.
+   * @param header Datos del header a actualizar (debe incluir el idHeader).
+   * @param token Token de autenticación JWT.
+   */
+  updateHeader(header: any, token: string) {
+    return this.apollo.mutate({
+      mutation: UPDATE_HEADER_MUTATION,
+      variables: {
+        idHeader: header.idHeader,
         name: header.name,
         description: header.description,
         imageUrl: header.imageUrl || null,

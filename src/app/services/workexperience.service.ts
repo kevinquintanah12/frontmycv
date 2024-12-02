@@ -17,6 +17,21 @@ const GET_EXPERIENCES_QUERY = gql`
   }
 `;
 
+const GET_EXPERIENCE_BY_ID_QUERY = gql`
+  query GetExperienceById($idWorkExperience: Int!) {
+    experienceById(idWorkExperience: $idWorkExperience) {
+      id
+      role
+      company
+      accomplishments
+      startDate
+      endDate
+      location
+    }
+  }
+`;
+
+
 
 const CREATE_EXPERIENCE_MUTATION = gql`
   mutation CreateWorkExperience(
@@ -152,6 +167,21 @@ export class GraphqlWorkExperienceService {
       context: { headers },
     });
   }
+
+
+  getWorkExperienceById(idWorkExperience: number, token: string) {
+    const headers = new HttpHeaders({
+      'Authorization': `JWT ${token}`,
+      'Content-Type': 'application/json',
+    });
+  
+    return this.apollo.query({
+      query: GET_EXPERIENCE_BY_ID_QUERY,
+      variables: { idWorkExperience },
+      context: { headers },
+    });
+  }
+  
 
 
 
