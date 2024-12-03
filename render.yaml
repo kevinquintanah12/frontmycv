@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: my-angular-app
+    env: node
+    plan: starter
+    buildCommand: "npm install && npm run build"
+    startCommand: "npm start"
+    envVars:
+      - key: NODE_ENV
+        value: production
+    autoscale: false
+    branch: main  # Puedes especificar la rama a desplegar
+
+previews:
+  - name: pr-preview
+    branch: "pr-*"
+    buildCommand: "npm install && npm run build"
+    startCommand: "npm start"
+    envVars:
+      - key: NODE_ENV
+        value: preview
